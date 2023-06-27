@@ -1,5 +1,6 @@
-import 'package:blog_app/blog_post/bottombar.dart';
-import 'package:blog_app/blog_post/postapp_bar.dart';
+
+import 'package:blog_app/screens/blog_post/bottombar.dart';
+import 'package:blog_app/screens/blog_post/postapp_bar.dart';
 import 'package:flutter/material.dart';
 
 class PostScreen extends StatelessWidget {

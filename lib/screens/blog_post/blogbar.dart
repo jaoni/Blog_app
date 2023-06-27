@@ -1,5 +1,6 @@
-import 'package:blog_app/blog_post/page1.dart';
-import 'package:blog_app/blog_post/post_screen.dart';
+
+import 'package:blog_app/screens/blog_post/page1.dart';
+import 'package:blog_app/screens/blog_post/post_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'bottombar.dart';

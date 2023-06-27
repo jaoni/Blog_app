@@ -1,8 +1,10 @@
 import 'package:blog_app/main.dart';
-import 'package:blog_app/util_s.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
+
+import '../../services/auth_services.dart';
+import '../../utils/util_s.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -104,8 +106,15 @@ class _SignupPageState extends State<SignupPage> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16),
                       color: Colors.blue),
-                  child: const TextButton(
-                    onPressed: signUp,
+                  child:  TextButton(
+                    onPressed: (){
+                        final isValid = formKey.currentState!.validate();
+                        if (!isValid) return;
+                        AuthServices.signUp(
+                        emailController: emailController,
+                        passwordController: passwordController
+                        );
+                    },
                     child: Text(
                       "Sign Up",
                       style: TextStyle(
@@ -175,16 +184,4 @@ class TextInputField extends StatelessWidget {
   }
 }
 
-Future signUp() async {
-  final isValid = formKey.currentState!.validate();
-  if (!isValid) return;
-  try {
-    await FirebaseAuth.instance.createUserWithEmailAndPassword(
-      email: emailController.text.trim(),
-      password: passwordController.text.trim(),
-    );
-  } on FirebaseAuthException catch (e) {
-    Utils.showSnackerBar(e.message);
-  }
-  navigatorKey.currentState!.popUntil((route) => route.isFirst);
-}
+
